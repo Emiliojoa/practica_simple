@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export const functionServices = () => {
   const [texts, setTexts] = useState([]);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const enviarTextos = async (texto) => {
     try {
@@ -12,7 +13,7 @@ export const functionServices = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({texto}),
+        body: JSON.stringify({ texto }),
       });
 
       if (response.ok) {
@@ -46,14 +47,32 @@ export const functionServices = () => {
 
   useEffect(() => {
     if (isUpdated) {
-      obtenerTextos(); 
+      obtenerTextos();
       setIsUpdated(false);
     }
-  }, [isUpdated]); 
+  }, [isUpdated]);
 
   useEffect(() => {
     obtenerTextos();
   }, []);
 
   return { enviarTextos, texts };
+
+  const eliminarText = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/delete/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        setIsDeleted(true);
+      }
+    } catch (error) {
+      console.log("Error al eliminar el texto");
+    }
+
+  }
+  
 };
+

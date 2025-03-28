@@ -5,7 +5,7 @@ import { functionServices } from './services/services.js';
 export const App = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const { enviarTextos, texts } = functionServices();
-  
+
   const [styleIndex, setStyleIndex] = useState(0);
 
   const styles = [
@@ -40,7 +40,7 @@ export const App = () => {
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           Panel de Mensajes Interactivo
         </h1>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           {/* Form Section */}
           <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -74,7 +74,7 @@ export const App = () => {
                 >
                   Enviar Mensaje
                 </button>
-                
+
                 <button
                   type="button"
                   onClick={toggleStyle}
@@ -97,6 +97,13 @@ export const App = () => {
                     className="bg-gradient-to-r from-indigo-50 to-purple-50 p-4 rounded-lg border border-gray-100"
                   >
                     <p className="text-gray-700 break-words">{text.texto}</p>
+                    <button
+                      type="button"
+                      onClick={() => deleteText(text._id)}
+                      className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition duration-200 ease-in-out mt-2"
+                    >
+                      Eliminar
+                    </button>
                   </div>
                 ))
               ) : (
