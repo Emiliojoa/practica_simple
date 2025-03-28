@@ -6,7 +6,7 @@ export const functionServices = () => {
 
   const enviarTextos = async (texto) => {
     try {
-      const response = await fetch(`http://localhost:3000/send`, {
+      const response = await fetch(`http://localhost:3000/enviar`, {
         method: "POST",
         credentials: "include",
         headers: {
